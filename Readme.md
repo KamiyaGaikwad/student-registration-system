@@ -14,7 +14,7 @@ The **Student Registration System** is a web application designed to allow stude
 
 ## Live Demo
 
-You can access the live demo of the project [here](https://your-live-demo-link.com).
+You can access the live demo of the project [here](https://student-registration-system1.netlify.app/).
 
 
 ## GitHub Repository
@@ -30,14 +30,14 @@ The source code for this project is available on GitHub: [Student Registration S
 - **Form Validations**: Input validation for all fields, including checks for correct name format, valid student ID (1-5 digits), valid email format, and 10-digit contact number.
 - **Local Storage Persistence**: Data persists even after refreshing the page, because of local storage.
 - **Dynamic Table**: Display added student data in a table that updates automatically.
-- **Modal for Editing**: Students' details can be edited through a modal dialog.
+- **Modal for Editing**: Students' details can be edited through a modal dialogue.
 
 ## Technologies Used
 
 - **HTML5**: Structuring the web page using semantic HTML elements.
 - **CSS3**: For styling the form, buttons, table, and modal, making it visually appealing.
 - **JavaScript (ES6)**: For input validation, handling form submissions, dynamic table updates, and local storage operations.
-- **Font Awesome**: To provide icons in the form and modal.
+- **Font Awesome**: Provide icons in the form and modal.
 - **LocalStorage API**: To store student data persistently within the browser.
 
 ## Installation

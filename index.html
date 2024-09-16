@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon_io_student/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon_io_student/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon_io_student/favicon-16x16.png">
+    <link rel="manifest" href="favicon_io_student/site.webmanifest">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Title of the document -->
+    <title>Student Registration System</title>
+</head>
+
+<body>
+    <!-- Heading -->
+    <header class="heading-container">
+        <h1>Student Registration System</h1>
+        <p>Student registration system is a system where students can register their details such as name,
+            student id, email id, and contact number. The records can also be edited or deleted.</p>
+        </header>
+
+    <!-- Purple ruler -->
+    <hr>
+
+    <!-- Main Content -->
+    <main class="content">
+        <!-- Form heading -->
+        <h2>Student Registration Form</h2>
+        <!-- Form -->
+        <form>
+            <!-- Name Input Label and Name Input -->
+            <!-- Name Input has id,placeholder and name attributes. type is text. It is required input. -->
+            <!-- On Input Change, it check the value is valid name or not  -->
+            <!-- onkeypress it makes sures double space is not allowed since it creates a dot which is not valid for name -->
+            <label for="student-name">
+                <!-- Icon and Field Name -->
+                <span class="icon-name"><i class="fa-solid fa-user"></i> Student name</span>
+                <input id="student-name" name="student-name" type="text" placeholder="John Doe" required
+                    oninput="validateName(event)" onkeypress="defaultPreventDoubleSpaceToAddDot(event)" />
+                <!-- paragraph to show respective errors -->
+                <p class="error-message" id="name-error"></p>
+            </label>
+
+            <!-- Student Id Input Label and Student Id Input -->
+            <!-- Student Id Input has id,placeholder,maxlength and name attributes. It is required input. type is number -->
+            <!-- On Input Change, it check the value is valid id or not, it should be 1-5 digits  -->
+            <!-- onkeypress it makes sures double space is not allowed since it creates a dot which is not valid for name -->
+            <!-- onkeydown it prevents letter e, dot and equal sign -->
+            <label for="student-id">
+                <!-- Icon and Field Name -->
+                <span class="icon-name"><i class="fa-solid fa-id-card"></i> Student ID</span>
+                <input id="student-id" name="student-id" type="number" maxlength="5" placeholder="12345" required
+                    oninput="validateId(event)"
+                    onkeydown="return event.keyCode !== 69 && event.keyCode!==190 && event.keyCode!==187"
+                    onkeypress="defaultPreventDoubleSpaceToAddDot(event)" />
+                <!-- paragraph to show respective errors -->
+                <p class="error-message" id="id-error"></p>
+            </label>
+
+            <!-- Email Id Input Label and Email Id Input -->
+            <!-- Email Id Input has id,placeholder and name attributes. It is required input. type is email -->
+            <!-- On Input Change, it check the email is valid id or not  -->
+            <label for="email-id">
+                <!-- Icon and Field Name -->
+                <span class="icon-name"><i class="fa-solid fa-envelope"></i> Email ID</span>
+                <input id="email-id" type="email" name="email-id" placeholder="abc@gmail.com"
+                    oninput="validateEmail(event)" required/>
+                <!-- paragraph to show respective errors -->
+                <p class="error-message" id="email-error"></p>
+            </label>
+
+            <!-- Contact no Input Label and Contact no Input -->
+            <!-- Contact no Input has id,placeholder,maxlength and name attributes. It is required input. type is number -->
+            <!-- On Input Change, it check the value is valid id or not, it should of 10 digits  -->
+            <!-- onkeypress it makes sures double space is not allowed since it creates a dot which is not valid for name -->
+            <!-- onkeydown it prevents letter e, dot and equal sign -->
+            <label for="contact-no">
+                <!-- Icon and Field Name -->
+                <span class="icon-name"><i class="fa-solid fa-phone"></i> Contact No</span>
+                <input id="contact-no" type="number" maxlength="10" placeholder="9876543210" required 
+                    oninput="validateContact(event)" onkeydown="return event.keyCode !== 69 && event.keyCode!==190 && event.keyCode!==187"
+                    onkeypress="defaultPreventDoubleSpaceToAddDot(event)" />
+                <!-- paragraph to show respective errors -->
+                <p class="error-message" id="contact-error"></p>
+            </label>
+
+            <!-- Button which has event listener attached and gets trigger for form submit -->
+            <button id="add-student-details-btn">Add Student Details</button>
+        </form>
+        
+        <!-- Table Heading -->
+        <h2>Student Data Table</h2>
+        <!-- Table Container -->
+        <div class="table-div">
+            <!-- Table -->
+            <table>
+                <!-- Table header -->
+                <thead>
+                    <!-- Table header row which contain heading columns -->
+                    <tr id="table-header">
+                        <th>Student Name</th>
+                        <th>Student ID</th>
+                        <th>Email ID</th>
+                        <th>Contact No</th>
+                        <th colspan="2">Functionalities</th>
+                    </tr>
+                </thead>
+                <!-- Table body -->
+                <!-- Data is added here dynamically by javascript by taking data from local storage -->
+                <tbody id="table-body">
+                </tbody>
+            </table>
+            <!-- paragraph to show respective errors if no data is present in table -->
+            <p class="no-table"></p>
+        </div>
+    </main>
+
+    <!-- Modal -->
+    <dialog id="modal-container" class="modal-container">
+        <div id="modal">
+            <!-- Close Icon -->
+            <i class="fa-solid fa-xmark close-icon" onclick="closeModal()"></i>
+            <!-- Update Form Heading -->
+            <h3>Update Form</h3>
+
+            <!-- Update Form -->
+            <!-- All form validations and error messages like entry form -->
+            <form>
+                <label for="update-student-name">
+                    <span class="icon-name"><i class="fa-solid fa-user"></i> Student name</span>
+                    <input id="update-student-name" type="text" name="update-student-name" required
+                        oninput="validateUpdateName(event)" onkeypress="defaultPreventDoubleSpaceToAddDot(event)" />
+                    <p class="error-message" id="update-name-error"></p>
+                </label>
+                <label for="update-student-id">
+                    <span class="icon-name"><i class="fa-solid fa-id-card"></i> Student ID</span>
+                    <!-- Student Id is disabled to prevent editing -->
+                    <input id="update-student-id" disabled />
+                    <!-- Info that this field cant be changed -->
+                    <small class="focus-green">Student ID cannot be changed</small>
+                </label>
+                <label for="update-email-id">
+                    <span class="icon-name"><i class="fa-solid fa-envelope"></i> Email ID</span>
+                    <input id="update-email-id" type="email" name="update-email-id"
+                        oninput="validateUpdateEmail(event)" />
+                    <p class="error-message" id="update-email-error"></p>
+                </label>
+                <label for="update-contact-no">
+                    <span class="icon-name"><i class="fa-solid fa-phone"></i> Contact No</span>
+                    <input id="update-contact-no" name="update-contact-no" type="number" maxlength="10"
+                        oninput="validateUpdateContact(event)"
+                        onkeydown="return event.keyCode !== 69 && event.keyCode!==190"
+                        onkeypress="defaultPreventDoubleSpaceToAddDot(event)" />
+                    <p class="error-message" id="update-contact-error"></p>
+                </label>
+                <!-- Button which has event listener attached and gets trigger for data update -->
+                <button id="update-student-details-btn">Update Student Details</button>
+            </form>
+        </div>
+    </dialog>
+    <!-- Script -->
+    <script src="index.js"></script>
+</body>
+
+</html>

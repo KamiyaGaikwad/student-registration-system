@@ -19,7 +19,7 @@ You can access the live demo of the project [here](https://student-registration-
 
 ## GitHub Repository
 
-The source code for this project is available on GitHub: [Student Registration System](https://github.com/KamiyaGaikwad/student-registration-system.git).
+The source code for this project is available on GitHub: [Student Registration System](https://github.com/KamiyaGaikwad/student-registration-system).
 
 
 ## Features
